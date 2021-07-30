@@ -19,7 +19,7 @@ def index(request):
     context_dict['pages'] = pages
 
     visitor_cookie_handler(request)
-    context_dict['visits'] = request.session['visits']
+    #context_dict['visits'] = request.session['visits']
     response = render(request, 'rango/index.html', context=context_dict)
     #visitor_cookie_handler(request, response)
     
@@ -31,10 +31,13 @@ def about(request):
     print(request.method)
     print(request.user)
 
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
     #if request.session.test_cookie_worked():
     #    print("TEST COOKIE WORKED!")
     #    request.session.delete_test_cookie()
-    return render(request, 'rango/about.html', {})
+    return render(request, 'rango/about.html', context=context_dict)
 
 def show_category(request, category_name_slug):
     context_dict = {}
